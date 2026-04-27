@@ -1,0 +1,27 @@
+/* App.css — shell + background decoration */
+
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle background radial glow */
+.app-shell::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(137, 180, 250, 0.055) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-shell > * { position: relative; z-index: 1; }
