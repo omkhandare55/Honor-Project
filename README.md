@@ -11,10 +11,9 @@ A production-quality full-stack **Contacts Management System** built with **Reac
 ## 👥 Team Members
 
 | Sr. No. | Name               | Role                         | Branch Worked On        |
-|---------|--------------------|------------------------------|-------------------------|
-| 1       | om                 | Frontend UI Components       | `feature/frontend-ui`   |
-| 2       | Tanushri           | API Services & State Hooks   | `feature/api-services`  |
-| 3       | krushna            | CI/CD Pipeline & Docs        | `feature/ci-docs`       |
+| 1       | om                 | Frontend UI Components       | `feature/om`            |
+| 2       | Tanushri           | API Services & State Hooks   | `feature/tanushri`      |
+| 3       | krushna            | CI/CD Pipeline & Docs        | `feature/krushna`       |
 
 
 ---
@@ -126,9 +125,9 @@ This project follows a **feature-branch workflow**:
 
 ```
 main
- ├── feature/frontend-ui     ← UI components (ContactCard, ContactForm, Skeleton, ErrorBanner)
- ├── feature/api-services    ← API layer (api.js, useContacts hook, mock server, Vite proxy)
- └── feature/ci-docs         ← CI/CD pipeline (GitHub Actions) + documentation (README)
+ ├── feature/om              ← UI components (ContactCard, ContactForm, Skeleton, ErrorBanner)
+ ├── feature/tanushri        ← API layer (api.js, useContacts hook, mock server, Vite proxy)
+ └── feature/krushna         ← CI/CD pipeline (GitHub Actions) + documentation (README)
 ```
 
 Each branch was developed independently and merged into `main` via pull requests.
