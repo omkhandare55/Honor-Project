@@ -1,0 +1,32 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma@example.com",
+      "phone": "+91 98765 43210",
+      "company": "TCS"
+    },
+    {
+      "id": 2,
+      "name": "Priya Patel",
+      "email": "priya.patel@example.com",
+      "phone": "+91 87654 32109",
+      "company": "Infosys"
+    },
+    {
+      "id": 4,
+      "name": "Sneha Kulkarni",
+      "email": "sneha.k@example.com",
+      "phone": "+91 65432 10987",
+      "company": "Google"
+    },
+    {
+      "id": 5,
+      "name": "Vikram Singh",
+      "email": "vikram.singh@example.com",
+      "phone": "+91 54321 09876",
+      "company": "Microsoft"
+    }
+  ]
+}
