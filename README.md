@@ -1,75 +1,157 @@
-# Contacts Manager — React + Spring Boot
+# 📇 Contacts Manager — React + Spring Boot
 
-A production-quality full-stack contacts management app connecting a **React (Vite)** frontend to a **Spring Boot** backend.
+A production-quality full-stack **Contacts Management System** built with **React (Vite)** frontend and **Spring Boot** backend. Features CRUD operations, real-time search, optimistic UI updates, and a modern dark-themed interface.
 
----
-
-## Project Structure
-
-```
-src/
-├── services/
-│   └── api.js              # Axios instance + all API methods (SINGLE SOURCE OF TRUTH)
-├── hooks/
-│   └── useContacts.js      # Custom hook — owns all contact state & async logic
-├── components/
-│   ├── ContactCard.jsx     # Single contact display card
-│   ├── ContactForm.jsx     # Add / Edit modal form (reusable)
-│   ├── SkeletonCard.jsx    # Loading skeleton (shimmer animation)
-│   └── ErrorBanner.jsx     # Persistent error display with retry
-├── pages/
-│   └── ContactList.jsx     # Main page — orchestrates everything
-├── App.jsx                 # Router setup
-├── App.css                 # App shell styles
-├── index.css               # Design system tokens + global reset
-└── main.jsx                # React entry point + Toast provider
-
-spring-boot-reference/
-└── CorsConfig.java         # Copy into your Spring Boot project
-```
+> **Course:** DevOps (Development and Operations) — RCP23IH1201  
+> **Class:** SY B.Tech IT  
+> **Faculty:** Sakshi V. Badgujar
 
 ---
 
-## Quick Start
+## 👥 Team Members
 
-### 1. Install dependencies
+| Sr. No. | Name               | Role                         | Branch Worked On        |
+|---------|--------------------|------------------------------|-------------------------|
+| 1       | om                 | Frontend UI Components       | `feature/frontend-ui`   |
+| 2       | Tanushri           | API Services & State Hooks   | `feature/api-services`  |
+| 3       | krushna            | CI/CD Pipeline & Docs        | `feature/ci-docs`       |
+
+
+---
+
+## ✨ Features
+
+- **CRUD Operations** — Create, Read, Update, Delete contacts
+- **Real-time Search** — Debounced search (400ms) with AbortController for cancellation
+- **Optimistic UI Updates** — Instant feedback; rolls back on failure
+- **Skeleton Loading** — Shimmer animation while data loads
+- **Toast Notifications** — Success/error feedback via `react-hot-toast`
+- **Form Validation** — Client-side field-level validation
+- **Responsive Design** — CSS Grid layout adapts to all screen sizes
+- **Error Handling** — 3-layer system: Axios interceptor → ErrorBanner → Toast
+- **Dark Theme** — Modern Catppuccin Mocha color palette
+- **GitHub Actions CI** — Automated build verification on push/PR
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer        | Technology                       |
+|--------------|----------------------------------|
+| Frontend     | React 18, Vite 5, CSS Modules   |
+| HTTP Client  | Axios (centralized instance)     |
+| Backend      | Spring Boot (Java)               |
+| Mock Server  | json-server (for dev)            |
+| CI/CD        | GitHub Actions                   |
+| Icons        | react-icons (Feather)            |
+| Notifications| react-hot-toast                  |
+
+---
+
+## 📁 Project Structure
+
+```
+Honor-Project/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                # GitHub Actions CI pipeline
+├── src/
+│   ├── services/
+│   │   └── api.js                # Axios instance + all API methods
+│   ├── hooks/
+│   │   └── useContacts.js        # Custom hook — state & async logic
+│   ├── components/
+│   │   ├── ContactCard.jsx       # Single contact display card
+│   │   ├── ContactCard.module.css
+│   │   ├── ContactForm.jsx       # Add/Edit modal form
+│   │   ├── ContactForm.module.css
+│   │   ├── SkeletonCard.jsx      # Loading skeleton
+│   │   ├── SkeletonCard.module.css
+│   │   ├── ErrorBanner.jsx       # Error display with retry
+│   │   └── ErrorBanner.module.css
+│   ├── pages/
+│   │   ├── ContactList.jsx       # Main page
+│   │   └── ContactList.module.css
+│   ├── App.jsx                   # Router setup
+│   ├── App.css                   # App shell styles
+│   ├── index.css                 # Design system tokens
+│   └── main.jsx                  # Entry point + Toast provider
+├── spring-boot-reference/
+│   └── CorsConfig.java           # CORS config for Spring Boot
+├── db.json                       # Mock data (json-server)
+├── mock-server.cjs               # Mock API server
+├── vite.config.js                # Vite config + proxy
+├── package.json
+└── README.md
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Node.js** ≥ 18.x
+- **npm** ≥ 9.x
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/Honor-Project.git
+cd Honor-Project
+```
+
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 2. Start Spring Boot backend
+### 3. Start the mock API server
 ```bash
-./mvnw spring-boot:run
-# Backend must be running on http://localhost:8080
+npm run mock
+# Runs on http://localhost:8080
 ```
 
-### 3. Start the React frontend
+### 4. Start the frontend (new terminal)
 ```bash
 npm run dev
 # Opens at http://localhost:5173
 ```
 
+> **With Spring Boot:** If your Spring Boot backend is running on port 8080, skip step 3. The Vite proxy automatically forwards `/api/*` requests.
+
 ---
 
-## How CORS Is Handled
+## 🔀 Branching Strategy
 
-### Option A — Vite Proxy (Dev — Zero Config)
-`vite.config.js` forwards all `/api/*` requests to `http://localhost:8080`:
+This project follows a **feature-branch workflow**:
 
-```js
-proxy: {
-  '/api': { target: 'http://localhost:8080', changeOrigin: true }
-}
+```
+main
+ ├── feature/frontend-ui     ← UI components (ContactCard, ContactForm, Skeleton, ErrorBanner)
+ ├── feature/api-services    ← API layer (api.js, useContacts hook, mock server, Vite proxy)
+ └── feature/ci-docs         ← CI/CD pipeline (GitHub Actions) + documentation (README)
 ```
 
-### Option B — Spring Boot CORS (Production)
-Copy `spring-boot-reference/CorsConfig.java` to your Spring Boot project and update the allowed origins.
+Each branch was developed independently and merged into `main` via pull requests.
 
 ---
 
-## API Methods (`src/services/api.js`)
+## ⚙️ GitHub Actions (CI)
 
-| Function                        | HTTP   | Endpoint               |
+A CI pipeline runs automatically on every push and pull request:
+
+- **Checkout** → clones the repo
+- **Setup Node.js** → tests on Node 18.x and 20.x
+- **Install** → `npm ci` for reproducible builds
+- **Build** → `npm run build` verifies the production bundle compiles
+- **Notify** → prints a success summary
+
+📄 Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+
+---
+
+## 📡 API Endpoints
+
+| Function                        | Method | Endpoint               |
 |---------------------------------|--------|------------------------|
 | `getAllContacts()`              | GET    | `/api/contacts/`       |
 | `searchContacts(query, signal)` | GET    | `/api/contacts/search` |
@@ -80,61 +162,17 @@ Copy `spring-boot-reference/CorsConfig.java` to your Spring Boot project and upd
 
 ---
 
-## Key Design Decisions
+## 🎯 Key Design Decisions
 
-### 1. Centralized Axios Instance
-All requests go through one `apiClient`. Interceptors handle logging and error mapping.
-
-### 2. Custom Hook (`useContacts`)
-Keeps pages thin. The hook owns debounced search (400ms) with `AbortController` to cancel stale requests and optimistic UI updates.
-
-### 3. Optimistic Updates
-```
-User clicks Delete → list updates instantly → API call fires in background
-If API fails → list is rolled back + error toast shown
-```
-
-### 4. Loading States
-- **First load**: 6 shimmer skeleton cards
-- **Form submit**: Spinner inside button + toast
-- **Delete**: Spinner in the delete button
-
-### 5. Error Handling (3 layers)
-1. **Axios interceptor** — translates status codes to friendly strings
-2. **ErrorBanner** — shown for persistent errors (e.g. network down) with Retry
-3. **Toast notifications** — shown for transient feedback
+1. **Centralized Axios Instance** — Single `apiClient` with request/response interceptors
+2. **Custom Hook (`useContacts`)** — Encapsulates all state management and async logic
+3. **Optimistic Updates** — UI updates instantly, rolls back on API failure
+4. **Debounced Search** — 400ms delay with `AbortController` to cancel stale requests
+5. **CSS Modules** — Scoped styles prevent class-name collisions
+6. **Mock Server** — Enables frontend development without Spring Boot
 
 ---
 
-## Debugging Guide
+## 📝 License
 
-### CORS Error
-```
-Access to XMLHttpRequest ... has been blocked by CORS policy
-```
-**Fix**: Add `CorsConfig.java` to your Spring Boot project + ensure Vite proxy is active.
-
-### 404 Error
-Check that Spring Boot runs on port 8080 and `@RequestMapping("/api/contacts")` matches.
-
-### 500 Error
-Check Spring Boot console for stack trace. Axios interceptor logs the full response.
-
-### Backend Not Running
-Axios timeout (10s) fires → `"Unable to reach the server. Is the backend running?"` in ErrorBanner.
-
-### Debugging API Calls
-1. Open **DevTools → Network tab** → filter by `api`
-2. Check **DevTools → Console** for colored interceptor logs (dev only)
-
----
-
-## Bonus Features Included
-- Toast notifications via `react-hot-toast`
-- Debounced search (400ms + AbortController)
-- Optimistic UI updates
-- Skeleton loading with shimmer effect
-- Field-level form validation
-- Responsive grid layout
-- ARIA attributes for accessibility
-# Honor-Project
+This project is developed for academic purposes as part of the DevOps course (RCP23IH1201).
